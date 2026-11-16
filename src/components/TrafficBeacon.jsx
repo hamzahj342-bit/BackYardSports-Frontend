@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { themeApi } from '../services/themeApi';
 
-const VISITOR_KEY = 'cb_vid';
-const PINGED_DAY_KEY = 'cb_vid_pinged';
+const VISITOR_KEY = 'bys_vid';
+const PINGED_DAY_KEY = 'bys_vid_recorded';
 
 const ensureVisitorKey = () => {
   try {

@@ -236,7 +236,8 @@ export const themeApi = {
   },
 
   pingTraffic: async (visitorKey) => {
-    const response = await api.post('/traffic/ping', { visitorKey });
+    // Use /visit — ad-blockers often block URLs that contain "ping".
+    const response = await api.post('/traffic/visit', { visitorKey });
     return response.data;
   },
 
