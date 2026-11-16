@@ -1,0 +1,337 @@
+/* BackYardSports sidebar — navy + blaze orange + gold */
+:root {
+  --side-bg: #0A1220;
+  --side-surface: #122033;
+  --side-item-hover: rgba(255, 90, 31, 0.16);
+  --side-accent: #FF5A1F;
+  --side-accent-soft: #FF7A45;
+  --side-gold: #FFC857;
+  --side-text: #F8FAFC;
+  --side-muted: #94A3B8;
+  --side-border: rgba(255, 200, 87, 0.18);
+}
+
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 18, 32, 0.72);
+  backdrop-filter: blur(8px);
+  z-index: 9998;
+}
+
+.side-drawer-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  background:
+    radial-gradient(ellipse at top left, rgba(255, 90, 31, 0.18), transparent 45%),
+    linear-gradient(180deg, #111827 0%, #0A1220 100%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 12px 0 40px rgba(0, 0, 0, 0.45);
+  color: var(--side-text);
+  border-right: 2px solid var(--side-accent);
+}
+
+.drawer-header {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--side-border);
+  background: linear-gradient(90deg, rgba(255, 90, 31, 0.22), rgba(255, 200, 87, 0.08));
+}
+
+.menu-title {
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--side-gold);
+}
+
+.close-btn {
+  background: rgba(255, 90, 31, 0.12);
+  border: 1px solid rgba(255, 90, 31, 0.45);
+  color: var(--side-gold);
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background: var(--side-accent);
+  color: #fff;
+  border-color: var(--side-accent);
+  transform: scale(1.05);
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.drawer-section {
+  margin-bottom: 22px;
+}
+
+.section-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--side-gold);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  padding-left: 4px;
+  border-left: 3px solid var(--side-accent);
+}
+
+.drawer-link,
+.drawer-btn {
+  display: flex;
+  align-items: center;
+  padding: 11px 12px;
+  text-decoration: none;
+  color: var(--side-text);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  background: transparent;
+  border: 1px solid transparent;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.nav-icon {
+  margin-right: 10px;
+  color: var(--side-accent);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.drawer-link:hover,
+.drawer-btn:hover {
+  background: var(--side-item-hover);
+  color: #fff;
+  transform: translateX(5px);
+  border-color: rgba(255, 90, 31, 0.35);
+  box-shadow: 0 4px 14px rgba(255, 90, 31, 0.18);
+}
+
+.drawer-link:hover .nav-icon,
+.drawer-btn:hover .nav-icon {
+  color: var(--side-gold);
+}
+
+.cat-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cat-item {
+  background: rgba(18, 32, 51, 0.85);
+  border: 1px solid rgba(255, 200, 87, 0.12);
+  border-radius: 10px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.cat-item:hover {
+  background: var(--side-item-hover);
+  border-color: var(--side-accent);
+  transform: translateX(3px);
+  box-shadow: 0 4px 12px rgba(255, 90, 31, 0.16);
+}
+
+.cat-name {
+  display: block;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--side-text);
+  transition: color 0.2s ease;
+}
+
+.cat-item:hover .cat-name {
+  color: var(--side-gold);
+}
+
+.admin-link {
+  color: var(--side-gold) !important;
+  font-weight: 700;
+  background: rgba(255, 90, 31, 0.14);
+  border-color: rgba(255, 90, 31, 0.35) !important;
+}
+
+.admin-link .nav-icon {
+  color: var(--side-gold);
+}
+
+.logout-btn {
+  color: #FCA5A5 !important;
+  margin-top: 10px;
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.35) !important;
+}
+
+.logout-btn .nav-icon {
+  color: #F87171;
+}
+
+.logout-btn:hover {
+  background: rgba(239, 68, 68, 0.22) !important;
+  color: #fff !important;
+}
+
+.drawer-footer {
+  padding: 16px;
+  border-top: 1px solid var(--side-border);
+  text-align: center;
+  background: linear-gradient(180deg, rgba(18, 32, 51, 0.6) 0%, #0A1220 100%);
+}
+
+.footer-mini-logo {
+  height: 64px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  margin-bottom: 10px;
+  background: #0A1220;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 90, 31, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.copyright-text {
+  font-size: 10px;
+  color: var(--side-muted);
+  margin: 0;
+}
+
+.codebase-tag {
+  font-size: 9px;
+  margin-top: 5px;
+  color: var(--side-muted);
+}
+
+.codebase-tag span {
+  color: var(--side-accent);
+  font-weight: 700;
+}
+
+.drawer-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.drawer-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.drawer-body::-webkit-scrollbar-thumb {
+  background: var(--side-accent);
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .side-drawer-container {
+    width: 85%;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .drawer-header {
+    padding: 18px 20px;
+  }
+
+  .menu-title {
+    font-size: 16px;
+  }
+
+  .drawer-body {
+    padding: 15px;
+  }
+
+  .section-label {
+    font-size: 11px;
+  }
+
+  .cat-list {
+    gap: 6px;
+  }
+
+  .cat-name {
+    font-size: 14px;
+    padding: 12px 15px;
+  }
+
+  .nav-icon {
+    font-size: 16px;
+    margin-right: 12px;
+  }
+
+  .drawer-link,
+  .drawer-btn {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .side-drawer-container {
+    width: 92%;
+  }
+
+  .drawer-header {
+    padding: 15px;
+  }
+
+  .menu-title {
+    font-size: 15px;
+  }
+
+  .drawer-body {
+    padding: 12px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    margin-bottom: 12px;
+  }
+
+  .cat-list {
+    gap: 4px;
+  }
+
+  .cat-name {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .nav-icon {
+    font-size: 14px;
+    margin-right: 10px;
+  }
+
+  .drawer-link,
+  .drawer-btn {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}

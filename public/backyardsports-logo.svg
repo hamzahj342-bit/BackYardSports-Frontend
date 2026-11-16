@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" role="img" aria-label="BackYardSports">
+  <defs>
+    <linearGradient id="bysSun" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFC857"/>
+      <stop offset="55%" stop-color="#FF7A45"/>
+      <stop offset="100%" stop-color="#FF5A1F"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Mark: backyard sun + ball -->
+  <g transform="translate(18, 22)">
+    <circle cx="48" cy="48" r="40" fill="url(#bysSun)"/>
+    <circle cx="48" cy="48" r="28" fill="#0A1220"/>
+    <path d="M48 20v56M20 48h56M28.5 28.5l39 39M67.5 28.5l-39 39" stroke="#FFC857" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="48" cy="48" r="10" fill="#FF5A1F"/>
+    <path d="M48 38c6 4 10 8 10 10s-4 6-10 10c-6-4-10-8-10-10s4-6 10-10z" fill="#FFC857"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g fill="#F8FAFC" font-family="Arial Black, Impact, Haettenschweiler, sans-serif" letter-spacing="1">
+    <text x="130" y="72" font-size="42" font-weight="900">BACKYARD</text>
+  </g>
+  <g fill="#FF5A1F" font-family="Arial Black, Impact, Haettenschweiler, sans-serif" letter-spacing="3">
+    <text x="130" y="108" font-size="34" font-weight="900">SPORTS</text>
+  </g>
+  <rect x="130" y="118" width="118" height="4" rx="2" fill="#FFC857"/>
+</svg>

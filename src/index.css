@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* BackYardSports — stadium navy + blaze orange + gold */
+  --brand-primary: #FF5A1F;
+  --brand-primary-hover: #FF7A45;
+  --brand-accent: #FFC857;
+  --brand-charcoal: #111827;
+  --brand-charcoal-deep: #0A1220;
+  --brand-bg: #0A1220;
+  --brand-surface: #FFFFFF;
+  --brand-white: #FFFFFF;
+  --brand-text: #111827;
+  --brand-muted: #94A3B8;
+  --brand-border: #CBD5E1;
+  --brand-offwhite: #F8FAFC;
+  --brand-gradient: linear-gradient(135deg, #FFC857 0%, #FF7A45 52%, #FF5A1F 100%);
+  --brand-shadow: 0 8px 20px rgba(255, 90, 31, 0.4);
+  --brand-drop-shadow: drop-shadow(0 0 12px rgba(255, 90, 31, 0.55));
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--brand-bg);
+  color: var(--brand-text);
+  font-family: 'Inter', 'Poppins', sans-serif;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.App {
+  width: 100%;
+  min-height: 100vh;
+  background: none;
+}
+
+.container {
+  max-width: 100%;
+  padding: 0 40px;
+}
+
+.banner_bg_main,
+.main-header-wrapper,
+.footer-section {
+  width: 100%;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.main-header-wrapper {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0;
+  margin: 0;
+}
+
+.announcement-bar,
+.navbar-main {
+  width: 100vw;
+  margin: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  position: relative;
+}
+
+.announcement-bar .container,
+.navbar-main .container {
+  max-width: 100%;
+  padding: 0 40px;
+  position: relative;
+  left: 0;
+  transform: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 90, 31, 0.22);
+}
+
+.btn-primary,
+.btn-primary:focus,
+.btn-primary:hover {
+  background: var(--brand-primary) !important;
+  border-color: var(--brand-primary) !important;
+  color: #fff !important;
+}
+
+.btn-outline-secondary,
+.btn-outline-dark {
+  border-color: var(--brand-charcoal) !important;
+  color: var(--brand-charcoal) !important;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-dark:hover {
+  background: var(--brand-charcoal) !important;
+  color: #fff !important;
+}
+
+
+/* Add this in src/index.css */
+html,
+body,
+#root,
+.App,
+.App > main {
+  background-color: #0A1220 !important;
+  background-image: 
+    radial-gradient(circle at 50% 30%, rgba(255, 90, 31, 0.14) 0%, transparent 65%),
+    linear-gradient(rgba(255, 200, 87, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 200, 87, 0.04) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 35px 35px, 35px 35px !important;
+  background-attachment: fixed !important;
+  color: #F8FAFC;
+  min-height: 100vh;
+}
+
+main,
+section,
+.container,
+.container-fluid,
+.home-modern-layout,
+.ap-page-wrapper,
+.cart-page-wrapper,
+.ch-checkout-page-wrapper,
+.ct-category-page-wrapper,
+.detail-page-wrapper {
+  background-color: transparent !important;
+}
