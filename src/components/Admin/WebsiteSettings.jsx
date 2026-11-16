@@ -15,34 +15,60 @@ const WebsiteSettings = () => {
     fetchSettings();
   }, []);
 
-  const fetchSettings = async (silent = false) => {
+  const STOREFRONT_CATEGORIES = ['logo', 'hero', 'contact', 'social', 'policies', 'general'];
+  const HIDDEN_CATEGORIES = new Set(['shipping', 'size_guide']);
+
+  const hasStorefrontSettings = (rawData) =>
+    STOREFRONT_CATEGORIES.some(
+      (cat) => Array.isArray(rawData?.[cat]) && rawData[cat].length > 0
+    );
+
+  const applySettings = (rawData) => {
+    const filtered = Object.fromEntries(
+      Object.entries(rawData || {}).filter(
+        ([category, rows]) =>
+          !HIDDEN_CATEGORIES.has(category) &&
+          Array.isArray(rows) &&
+          rows.length > 0
+      )
+    );
+    setSettings(filtered);
+    const previews = {};
+    Object.values(filtered)
+      .flat()
+      .forEach((setting) => {
+        if (setting?.type === 'image' && setting?.value) {
+          previews[setting.id] = setting.value;
+        }
+      });
+    setPreviewImages(previews);
+  };
+
+  const fetchSettings = async (silent = false, allowInit = true) => {
     try {
       setLoading(true);
       const response = await websiteSettingsApi.getWebsiteSettings();
-      const rawData = response?.success && response?.data && typeof response.data === 'object' ? response.data : null;
-      // Must have at least one category with a non-empty array of settings
-      const validData = rawData && Object.values(rawData).some(arr => Array.isArray(arr) && arr.length > 0) ? rawData : null;
+      const rawData =
+        response?.success && response?.data && typeof response.data === 'object'
+          ? response.data
+          : null;
 
-      if (validData) {
-        setSettings(validData);
-        const previews = {};
-        Object.values(validData).flat().forEach(setting => {
-          if (setting?.type === 'image' && setting?.value) {
-            previews[setting.id] = setting.value;
-          }
-        });
-        setPreviewImages(previews);
-      } else {
+      // Production often only has shipping rows after first boot — that must
+      // still trigger initialize so logo/hero/contact appear.
+      if (rawData && hasStorefrontSettings(rawData)) {
+        applySettings(rawData);
+      } else if (allowInit) {
         if (!silent) {
-          console.warn('WebsiteSettings: invalid settings response', response);
+          console.warn('WebsiteSettings: storefront settings missing, initializing…', response);
         }
         const initResponse = await websiteSettingsApi.initializeSettings();
         if (initResponse?.success) {
-          await fetchSettings(silent);
+          await fetchSettings(silent, false);
         } else {
-          setSettings({});
-          setPreviewImages({});
+          applySettings(rawData || {});
         }
+      } else {
+        applySettings(rawData || {});
       }
     } catch (error) {
       console.error('WebsiteSettings fetchSettings error:', error);
