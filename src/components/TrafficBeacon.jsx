@@ -61,7 +61,10 @@ const TrafficBeacon = () => {
     const timer = window.setTimeout(async () => {
       sentForDay.current = day;
       try {
-        const { data } = await api.post('/traffic/visit', { visitorKey });
+        const { data } = await api.post('/traffic/visit', {
+          visitorKey,
+          source: 'bys-storefront',
+        });
         try {
           sessionStorage.setItem(RECORDED_DAY_KEY, day);
         } catch {

@@ -114,7 +114,7 @@ const Dashboard = ({ stats, products, categories, orders, onNavigate }) => {
               Store visits (outside Pakistan)
             </h3>
             <p className="sm-muted mb-0" style={{ fontSize: '0.82rem' }}>
-              Real unique visitors per day · USA and all countries except Pakistan
+              Real browser visitors only · bots excluded · all countries except Pakistan
             </p>
           </div>
           <div className="sm-traffic-filters">
