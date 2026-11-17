@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { themeApi } from '../services/themeApi';
+import api from '../services/themeApi';
 
 const VISITOR_KEY = 'bys_vid';
-const PINGED_DAY_KEY = 'bys_vid_recorded';
+const RECORDED_DAY_KEY = 'bys_vid_recorded';
 
 const ensureVisitorKey = () => {
   try {
@@ -23,12 +23,21 @@ const ensureVisitorKey = () => {
 
 const todayKey = () => new Date().toISOString().slice(0, 10);
 
+const wantsDebug = () => {
+  try {
+    return new URLSearchParams(window.location.search).has('debugTraffic');
+  } catch {
+    return false;
+  }
+};
+
 /**
  * Records one unique storefront visit per browser per day.
- * Skips admin. Product-page fake "live visitors" are unrelated.
+ * Uses /traffic/visit (not /ping — ad-blockers often drop "ping" URLs).
  */
 const TrafficBeacon = () => {
   const location = useLocation();
+  const sentForDay = useRef(null);
 
   useEffect(() => {
     const path = location.pathname || '';
@@ -38,30 +47,40 @@ const TrafficBeacon = () => {
     if (!visitorKey) return;
 
     const day = todayKey();
+    if (sentForDay.current === day) return;
+
     try {
-      if (sessionStorage.getItem(PINGED_DAY_KEY) === day) return;
+      if (sessionStorage.getItem(RECORDED_DAY_KEY) === day && !wantsDebug()) {
+        return;
+      }
     } catch {
       /* ignore */
     }
 
-    let cancelled = false;
-    (async () => {
+    // Delay so React StrictMode cleanup does not abort the real send.
+    const timer = window.setTimeout(async () => {
+      sentForDay.current = day;
       try {
-        await themeApi.pingTraffic(visitorKey);
-        if (!cancelled) {
-          try {
-            sessionStorage.setItem(PINGED_DAY_KEY, day);
-          } catch {
-            /* ignore */
-          }
+        const { data } = await api.post('/traffic/visit', { visitorKey });
+        try {
+          sessionStorage.setItem(RECORDED_DAY_KEY, day);
+        } catch {
+          /* ignore */
         }
-      } catch {
-        /* silent — never block storefront */
+        if (wantsDebug()) {
+          console.log('[TrafficBeacon]', data);
+          window.__BYS_TRAFFIC__ = data;
+        }
+      } catch (err) {
+        sentForDay.current = null;
+        if (wantsDebug()) {
+          console.warn('[TrafficBeacon] failed', err?.response?.status || err?.message || err);
+        }
       }
-    })();
+    }, 300);
 
     return () => {
-      cancelled = true;
+      window.clearTimeout(timer);
     };
   }, [location.pathname]);
 
