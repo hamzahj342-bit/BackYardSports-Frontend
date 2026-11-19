@@ -106,7 +106,7 @@ const Dashboard = ({ stats, products, categories, orders, onNavigate }) => {
         </div>
       </div>
 
-      <div className="sm-card sm-traffic-card mb-4">
+      {/* <div className="sm-card sm-traffic-card mb-4">
         <div className="sm-traffic-head">
           <div>
             <h3 className="sm-section-title mb-1">
@@ -195,7 +195,7 @@ const Dashboard = ({ stats, products, categories, orders, onNavigate }) => {
             )}
           </>
         )}
-      </div>
+      </div> */}
 
       <div className="sm-two-col">
         <div className="sm-card">
